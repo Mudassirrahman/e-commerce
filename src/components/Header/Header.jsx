@@ -15,6 +15,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -98,7 +99,7 @@ export default function Header() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to="/signin">Login</Link></MenuItem>
     </Menu>
   );
 
@@ -165,7 +166,7 @@ export default function Header() {
             component="div"
             sx={{ display: {  sm: 'block' } }}
           >
-            Buy...
+           <Link className='text-white text-decoration-none' to="/"> Buy...</Link>
           </Typography>
           <Search>
             <SearchIconWrapper>
