@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material'
+import { Box, Container, IconButton } from '@mui/material'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from 'axios'
@@ -19,10 +19,15 @@ function Products() {
            <Box className="card-body">
            <h1 className='card-title'>{product.title.length >= 15 ? product.title.slice(0,15).concat("..."): product.title}</h1>
            <p className='card-text'>{product.description.length >= 90 ? product.description.slice(0,90).concat("..."): product.description}</p>
+           <p>Price: ${product.price}</p>
            </Box>
             <Box className="d-flex justify-content-center gap-5">
-              <VisibilityIcon className='' />
-              <AddShoppingCartIcon />
+            <IconButton size="large" color="info">
+             <VisibilityIcon />
+            </IconButton>
+            <IconButton size="large" color="success">
+             <AddShoppingCartIcon />
+            </IconButton>
             </Box>
           </Box>
         )
