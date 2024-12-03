@@ -17,7 +17,7 @@ function Products() {
           <Box key={product.id} className="card flex-grow-1 col-lg-3 col-md-3 col-sm-5 col-12 p-3">
           <img max-width="200px" height="300px" className='card-img-top' src={product.image} />
            <Box className="card-body">
-           <h1 className='card-title'>{product.title.length >= 15 ? product.title.slice(0,15).concat("..."): product.title}</h1>
+           <h1 className='card-title'>{product.title.length >= 11 ? product.title.slice(0,11).concat("..."): product.title}</h1>
            <p className='card-text'>{product.description.length >= 90 ? product.description.slice(0,90).concat("..."): product.description}</p>
            <p>Price: ${product.price}</p>
            </Box>
