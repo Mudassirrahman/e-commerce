@@ -17,6 +17,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import Cart from "../Cart/Cart";
+import { useSelector } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,6 +67,8 @@ export default function Header() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const [open, setOpen] = React.useState(false);
+
+  let cartcount = useSelector((state) => state.cartItems.items.length )
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -195,7 +198,7 @@ export default function Header() {
                 aria-label="show 4 new mails"
                 color="inherit"
               >
-                <Badge badgeContent={0} color="error">
+                <Badge badgeContent={cartcount} color="error">
                   <ShoppingCartIcon onClick={toggleDrawer(true)} />
                 </Badge>
               </IconButton>
