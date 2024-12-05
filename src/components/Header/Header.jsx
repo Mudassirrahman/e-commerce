@@ -68,7 +68,7 @@ export default function Header() {
 
   const [open, setOpen] = React.useState(false);
 
-  let cartcount = useSelector((state) => state.cartItems.items.length )
+  let cartcount = useSelector((state) => state.cartItems.items.length);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -110,7 +110,9 @@ export default function Header() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <Link className="text-decoration-none text-dark" to="/signin">Login</Link>
+        <Link className="text-decoration-none text-dark" to="/signin">
+          Login
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -132,13 +134,13 @@ export default function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={0} color="error">
-            <ShoppingCartIcon onClick={toggleDrawer(true)} />
+      <MenuItem onClick={toggleDrawer(true)}>
+        <IconButton size="large" aria-label="" color="inherit">
+          <Badge badgeContent={cartcount} color="error">
+            <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p className="mt-3">Cart</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -146,11 +148,11 @@ export default function Header() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={1} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p className="mt-3">Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -162,7 +164,7 @@ export default function Header() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p className="mt-3">Profile</p>
       </MenuItem>
     </Menu>
   );
