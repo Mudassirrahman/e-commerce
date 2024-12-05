@@ -3,6 +3,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function Products() {
   let [products, setProducts] = useState([])
@@ -21,13 +22,14 @@ function Products() {
           <img max-width="200px" height="300px" className='card-img-top' src={product.image} />
            <Box className="card-body">
            <Typography variant='h4' className='card-title'>{product.title.length >= 11 ? product.title.slice(0,11).concat("..."): product.title}</Typography>
-           <Typography className='card-text'>{product.description.length >= 90 ? product.description.slice(0,90).concat("..."): product.description}</Typography>
            <Typography>Price: ${product.price}</Typography>
            </Box>
             <Box className="d-flex justify-content-center gap-5">
-            <IconButton size="large" color="info">
+             <Link to={`/product-detail/${product.id}`}>
+             <IconButton size="large" color="info">
              <VisibilityIcon />
-            </IconButton>
+             </IconButton>
+             </Link>
             <IconButton size="large" color="success">
              <AddShoppingCartIcon />
             </IconButton>
