@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import { Container } from "@mui/material";
 import { useSelector } from "react-redux";
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Cart({ open, toggleDrawer }) {
   let cartitem = useSelector((item) => item.cartItems.items);
@@ -11,10 +12,10 @@ export default function Cart({ open, toggleDrawer }) {
     <Container>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         <Box
-          sx={{ width: 300  }}
+          sx={{ width: 250  }}
           role="presentation"
-          onClick={toggleDrawer(false)}
         >
+        <CloseIcon className="float-end" onClick={toggleDrawer(false)} />
           <h1 className="px-2">your cart items</h1>
           {cartitem.map((item) => {
             return (
