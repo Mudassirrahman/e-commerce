@@ -7,11 +7,13 @@ let addToCartReducer = createSlice({
   },
   reducers: {
     addItemInToCart: (state, action) => {
-      let isExist = state.items.find((item) => item.id === action.payload.id);
+      let {product, toast} = action.payload
+      let isExist = state.items.find((item) => item.id === product.id);
       if (isExist) {
-        alert("item already added");
+       toast.info("item already exist")
       } else {
-        state.items.push(action.payload);
+        state.items.push(product);
+       toast.success("item added in cart")
       }
     },
   },

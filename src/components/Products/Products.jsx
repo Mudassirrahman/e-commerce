@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItemInToCart } from "../../slices/addToCartSlice";
+import { ToastContainer, toast } from 'react-toastify';
 
 function Products() {
   let [products, setProducts] = useState([]);
@@ -27,6 +28,7 @@ function Products() {
   }, []);
   return (
     <Container>
+    <ToastContainer />
       {loader === true ? (
         <Box sx={{ textAlign: "center", m: 5 }}>
           <CircularProgress />
@@ -62,7 +64,7 @@ function Products() {
                   <IconButton
                     size="large"
                     color="success"
-                    onClick={() => dispatch(addItemInToCart(product))}
+                    onClick={() => {dispatch(addItemInToCart({product,toast}))}}
                   >
                     <AddShoppingCartIcon />
                   </IconButton>
