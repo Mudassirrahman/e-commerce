@@ -17,7 +17,8 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import Cart from "../Cart/Cart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { findBySearch } from "../../slices/productSlice";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,13 +63,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [inpValue, setInpValue] = React.useState("");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const [open, setOpen] = React.useState(false);
 
-  let cartcount = useSelector((state) => state.cartItems.items.length);
+  let cartcount = useSelector(
+    (state) => state.PRODUCTS.products.cartProducts.length
+  );
+  let dispatch = useDispatch();
+
+  let findItem = (event) => {
+    let value = event.target.value;
+    setInpValue(value); // Update state
+    dispatch(findBySearch(value));
+  };
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -191,17 +202,19 @@ export default function Header() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                onChange={findItem}
+                value={inpValue}
               />
             </Search>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <IconButton
                 size="large"
-                aria-label="show 4 new mails"
                 color="inherit"
+                onClick={toggleDrawer(true)}
               >
                 <Badge badgeContent={cartcount} color="error">
-                  <ShoppingCartIcon onClick={toggleDrawer(true)} />
+                  <ShoppingCartIcon />
                 </Badge>
               </IconButton>
               <IconButton

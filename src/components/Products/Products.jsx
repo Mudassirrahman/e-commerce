@@ -10,32 +10,35 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addItemInToCart } from "../../slices/addToCartSlice";
-import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch, useSelector } from "react-redux";
+import { addItemInToCart, getItems } from "../../slices/productSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 function Products() {
-  let [products, setProducts] = useState([]);
   let [loader, setLoader] = useState(false);
+
+  let productsItems = useSelector(
+    (state) => state.PRODUCTS.products.ProductItemsFromApi || []
+  );
   let dispatch = useDispatch();
 
   useEffect(() => {
     setLoader(true);
     axios.get("https://fakestoreapi.com/products").then((responce) => {
-      setProducts(responce.data);
+      dispatch(getItems(responce.data));
       setLoader(false);
     });
   }, []);
   return (
     <Container>
-    <ToastContainer />
+      <ToastContainer />
       {loader === true ? (
         <Box sx={{ textAlign: "center", m: 5 }}>
           <CircularProgress />
         </Box>
       ) : (
         <Box className="d-flex flex-wrap mt-5 gap-4 justify-content-lg-between justify-content-md-between justify-content-sm-between justify-content-center align-content-center">
-          {products.map((product) => {
+          {productsItems?.map((product) => {
             return (
               <Box
                 key={product.id}
@@ -64,7 +67,9 @@ function Products() {
                   <IconButton
                     size="large"
                     color="success"
-                    onClick={() => {dispatch(addItemInToCart({product,toast}))}}
+                    onClick={() => {
+                      dispatch(addItemInToCart({ product, toast }));
+                    }}
                   >
                     <AddShoppingCartIcon />
                   </IconButton>
